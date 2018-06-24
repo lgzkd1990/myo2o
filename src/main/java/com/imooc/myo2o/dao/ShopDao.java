@@ -46,7 +46,7 @@ public interface ShopDao {
 	 * 新增店铺
 	 * 
 	 * @param shop
-	 * @return effectedNum
+	 * @return 影响的行数
 	 */
 	int insertShop(Shop shop);
 

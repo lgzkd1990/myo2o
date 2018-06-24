@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +27,15 @@ import com.imooc.myo2o.service.AreaService;
 @Controller
 @RequestMapping("/superadmin")
 public class AreaController {
+	Logger logger = LoggerFactory.getLogger(AreaController.class);
 	@Autowired
 	private AreaService areaService;
 
 	@RequestMapping(value = "/listareas", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> listAreas() {
+		logger.info("start");
+		long start= System.currentTimeMillis();
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		List<Area> list = new ArrayList<Area>();
 		try {
@@ -43,6 +48,10 @@ public class AreaController {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", e.toString());
 		}
+		logger.error("test error!");
+		long end= System.currentTimeMillis();
+		logger.debug("cost time:[{}ms] ",end-start);
+		logger.info("end");
 		return modelMap;
 	}
 
